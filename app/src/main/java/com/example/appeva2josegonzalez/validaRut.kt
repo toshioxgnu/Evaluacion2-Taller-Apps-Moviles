@@ -14,8 +14,6 @@ fun valida(rut: String): Boolean {
         6 -> "0000" + rut
         else -> rut
     }
-    println(rutvalida)
-
     for (i in 0.. constantesValidacion.size -1 ){
         suma += Character.getNumericValue(rutvalida[i]) * constantesValidacion[i]
     }
