@@ -1,34 +1,47 @@
 package com.example.appeva2josegonzalez
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.appeva2josegonzalez.dummy.DummyContent
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_list_view.*
-import java.text.FieldPosition
+import kotlinx.android.synthetic.main.person_row.*
+
 
 class listView : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_view)
+        var personsURL = "http://192.168.1.81:5000/api/v1/resources/persons"
         var PersonList = ArrayList<Person>()
-        PersonList.add(Person("18247430-4", "Jose Gonzalez", "99956555", "correo@correo.cl"))
-        PersonList.add(Person("18247430-4", "Jose Gonzalez", "99956555", "correo@correo.cl"))
-        PersonList.add(Person("18247430-4", "Jose Gonzalez", "99956555", "correo@correo.cl"))
-        PersonList.add(Person("18247430-4", "Jose Gonzalez", "99956555", "correo@correo.cl"))
-        PersonList.add(Person("18247430-4", "Jose Gonzalez", "99956555", "correo@correo.cl"))
-        PersonList.add(Person("18247430-4", "Jose Gonzalez", "99956555", "correo@correo.cl"))
-        PersonList.add(Person("18247430-4", "Jose Gonzalez", "99956555", "correo@correo.cl"))
-        PersonList.add(Person("18247430-4", "Jose Gonzalez", "99956555", "correo@correo.cl"))
-        PersonList.add(Person("18247430-4", "Jose Gonzalez", "99956555", "correo@correo.cl"))
-        PersonList.add(Person("18247430-4", "Jose Gonzalez", "99956555", "correo@correo.cl"))
-        PersonList.add(Person("18247430-4", "Jose Gonzalez", "99956555", "correo@correo.cl"))
+        var request0 = Volley.newRequestQueue(this@listView)
+        var jsonAR = JsonArrayRequest(Request.Method.GET, personsURL, null, Response.Listener {
+            response ->
+            for( jsonObject in 0.until(response.length()) ){
+                PersonList.add(Person(response.getJSONObject(jsonObject).getString("RUT"),
+                    response.getJSONObject(jsonObject).getString("NOMBRE"),
+                    response.getJSONObject(jsonObject).getString("TELEFONO"),
+                    response.getJSONObject(jsonObject).getString("MAIL")))
+            }
+            RV_Persons.layoutManager = LinearLayoutManager(this@listView)
+            var rvAdapater = Person_adapter(this@listView, PersonList)
+            RV_Persons.adapter = rvAdapater
 
-        var rvAdapater = Person_adapter(this@listView, PersonList)
-        RV_Persons.layoutManager = LinearLayoutManager(this@listView)
-        RV_Persons.adapter = rvAdapater
+        }, Response.ErrorListener{
+            error  ->
+            val alerta = AlertDialog.Builder(this)
+            alerta.setTitle("Error")
+            alerta.setMessage(error.message)
+            alerta.show()
+        })
+
+        request0.add(jsonAR)
     }
-
 }
