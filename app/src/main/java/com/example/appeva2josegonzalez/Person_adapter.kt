@@ -1,17 +1,21 @@
 package com.example.appeva2josegonzalez
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_list_view.*
 import kotlinx.android.synthetic.main.person_row.view.*
 
 class Person_adapter(var context: Context,var arrayList: ArrayList<Person> ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         var personView = LayoutInflater.from(context).inflate(R.layout.person_row, parent, false)
         return PersonViewHolder(personView)
+
     }
 
     override fun getItemCount(): Int {
@@ -31,4 +35,5 @@ class Person_adapter(var context: Context,var arrayList: ArrayList<Person> ) : R
             pnombreTV.text = pnombre
         }
     }
+
 }

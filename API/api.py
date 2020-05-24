@@ -3,27 +3,23 @@ from flask import request, jsonify
 import pymysql.cursors
 
 app = flask.Flask(__name__)
-app.config["DEBUG"] = True
+app.config["DEBUG"] = False
 
 
 @app.route('/api/v1/resources/persons', methods=['GET'])
 def api_all():
-    query_parameters = request.args
-
-    rut=query_parameters.get('RUT')
     conn = pymysql.connect(host='localhost', user='root',password='root',db='appmoviles',cursorclass=pymysql.cursors.DictCursor)
 
     try:
         with conn.cursor() as cursor:
             query = "select * from `tbpersonas` ;"
-            cursor.execute(query,rut)
+            cursor.execute(query)
             result= cursor.fetchall()
             return jsonify(result)
     finally:
         conn.close()
-    return jsonify(persons)
 
-@app.route('/api/v1/resources/persons',methods=['GET'])
+@app.route('/api/v1/resources/persons/select',methods=['GET'])
 def api_filter():
     query_parameters = request.args
 
@@ -50,7 +46,7 @@ def api_insert():
     conn = pymysql.connect(host='localhost', user='root',password='root',db='appmoviles',cursorclass=pymysql.cursors.DictCursor)
 
     try:
-        with conn.cursor() as cursor:
+        with conn.cursor() as cursor: 
             query = "insert into `tbpersonas` (`RUT`, `NOMBRE`, `TELEFONO`, `MAIL`) values (%s,%s,%s,%s)"
             cursor.execute(query,(rut,nombre,telefono,mail))
         conn.commit()
@@ -74,4 +70,4 @@ def api_delete():
     finally:
         conn.close()
 
-app.run()
+app.run('192.168.1.81')
