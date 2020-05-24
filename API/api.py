@@ -58,4 +58,20 @@ def api_insert():
     finally:
         conn.close()
 
+@app.route('/api/v1/resources/persons/delete',methods=['GET'])
+def api_delete():
+    query_parameters = request.args
+    rut=query_parameters.get('RUT')
+
+    conn = pymysql.connect(host='localhost', user='root',password='root',db='appmoviles',cursorclass=pymysql.cursors.DictCursor)
+
+    try:
+        with conn.cursor() as cursor:
+            query = "delete from `tbpersonas` where `RUT` = %s"
+            cursor.execute(query,(rut))
+        conn.commit()
+        return jsonify(True)
+    finally:
+        conn.close()
+
 app.run()

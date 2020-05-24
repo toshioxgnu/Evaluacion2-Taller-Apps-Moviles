@@ -16,4 +16,6 @@
     <string name="nombre">Nombre</string>
     <string name="mail">Mail</string>
     <string name="telefono">Telefono</string>
+    <string name="textview">TextView</string>
+    <string name="editar">Editar</string>
 </resources>

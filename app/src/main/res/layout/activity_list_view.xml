@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:clickable="true"
+        android:foreground="@android:drawable/ic_menu_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.901"
@@ -19,6 +20,7 @@
         app:srcCompat="@android:drawable/ic_input_add" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RV_Persons"
         android:layout_width="409dp"
         android:layout_height="641dp"
         app:layout_constraintBottom_toBottomOf="parent"
