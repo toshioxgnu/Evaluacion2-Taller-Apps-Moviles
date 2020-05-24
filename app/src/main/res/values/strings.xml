@@ -13,4 +13,5 @@
     <string name="ingrese_nombre">Ingrese nombre</string>
     <string name="rut">RUT</string>
     <string name="nombre">Nombre</string>
+    <string name="text"></string>
 </resources>
