@@ -11,7 +11,9 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="ingrese_rut">Ingrese Rut</string>
     <string name="ingrese_nombre">Ingrese nombre</string>
+    <string name="text"></string>
     <string name="rut">RUT</string>
     <string name="nombre">Nombre</string>
-    <string name="text"></string>
+    <string name="mail">Mail</string>
+    <string name="telefono">Telefono</string>
 </resources>
