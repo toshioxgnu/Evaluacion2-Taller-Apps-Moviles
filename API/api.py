@@ -1,9 +1,12 @@
 import flask 
 from flask import request, jsonify
 import pymysql.cursors
+import socket
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = False
+
+ip = socket.gethostbyname(socket.gethostname())
 
 
 @app.route('/api/v1/resources/persons', methods=['GET'])
@@ -70,4 +73,5 @@ def api_delete():
     finally:
         conn.close()
 
-app.run('192.168.1.81')
+print(ip)
+app.run(ip)

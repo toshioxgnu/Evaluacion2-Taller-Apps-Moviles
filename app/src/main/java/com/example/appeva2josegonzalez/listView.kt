@@ -1,8 +1,13 @@
 package com.example.appeva2josegonzalez
 
 import android.app.AlertDialog
+import android.content.ClipData
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,15 +17,17 @@ import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_list_view.*
 import kotlinx.android.synthetic.main.person_row.*
+import kotlinx.android.synthetic.main.person_row.view.*
 
 
-class listView : AppCompatActivity(){
-
+class listView : AppCompatActivity(), Person_adapter.OnPersonListener {
+    var PersonList = ArrayList<Person>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_view)
+
         var personsURL = "http://192.168.1.81:5000/api/v1/resources/persons"
-        var PersonList = ArrayList<Person>()
+
         var request0 = Volley.newRequestQueue(this@listView)
         var jsonAR = JsonArrayRequest(Request.Method.GET, personsURL, null, Response.Listener {
             response ->
@@ -43,5 +50,11 @@ class listView : AppCompatActivity(){
         })
 
         request0.add(jsonAR)
+    }
+
+    override fun onPersonClick(position: Int) {
+        PersonList.get(position)
+        var intent= Intent(this, Edit_personActivity::class.java)
+        startActivity(intent)
     }
 }
