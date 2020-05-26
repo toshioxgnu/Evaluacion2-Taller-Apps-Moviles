@@ -5,7 +5,6 @@ import pymysql.cursors
 app = flask.Flask(__name__)
 app.config["DEBUG"] = False
 
-
 @app.route('/api/v1/resources/persons', methods=['GET'])
 def api_all():
     conn = pymysql.connect(host='localhost', user='root',password='root',db='appmoviles',cursorclass=pymysql.cursors.DictCursor)
@@ -65,6 +64,25 @@ def api_delete():
         with conn.cursor() as cursor:
             query = "delete from `tbpersonas` where `RUT` = %s"
             cursor.execute(query,(rut))
+        conn.commit()
+        return jsonify(True)
+    finally:
+        conn.close()
+
+@app.route('/api/v1/resources/persons/update',methods=['GET'])
+def api_update():
+    query_parameters = request.args
+    rut=query_parameters.get('RUT')
+    nombre=query_parameters.get('NOMBRE')
+    telefono=query_parameters.get('TELEFONO')
+    mail=query_parameters.get('MAIL')
+
+    conn = pymysql.connect(host='localhost', user='root',password='root',db='appmoviles',cursorclass=pymysql.cursors.DictCursor)
+
+    try:
+        with conn.cursor() as cursor:
+            query = "update `tbpersonas` set `NOMBRE`= %s, `TELEFONO`=%s, `MAIL`=%s  where `RUT` = %s"
+            cursor.execute(query,(nombre,telefono,mail,rut))
         conn.commit()
         return jsonify(True)
     finally:

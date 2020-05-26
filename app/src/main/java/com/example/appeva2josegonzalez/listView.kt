@@ -1,26 +1,26 @@
 package com.example.appeva2josegonzalez
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_list_view.*
-import kotlinx.android.synthetic.main.person_row.*
 
 
 class listView : AppCompatActivity(){
-
+    var PersonList = ArrayList<Person>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_view)
+        var btn_add = findViewById<FloatingActionButton>(R.id.btn_flt_agrega)
         var personsURL = "http://192.168.1.81:5000/api/v1/resources/persons"
-        var PersonList = ArrayList<Person>()
+
         var request0 = Volley.newRequestQueue(this@listView)
         var jsonAR = JsonArrayRequest(Request.Method.GET, personsURL, null, Response.Listener {
             response ->
@@ -31,7 +31,7 @@ class listView : AppCompatActivity(){
                     response.getJSONObject(jsonObject).getString("MAIL")))
             }
             RV_Persons.layoutManager = LinearLayoutManager(this@listView)
-            var rvAdapater = Person_adapter(this@listView, PersonList)
+            var rvAdapater = Person_adapter(this@listView, PersonList , {person: Person -> PersonClicked(person)})
             RV_Persons.adapter = rvAdapater
 
         }, Response.ErrorListener{
@@ -41,7 +41,18 @@ class listView : AppCompatActivity(){
             alerta.setMessage(error.message)
             alerta.show()
         })
-
         request0.add(jsonAR)
+
+        btn_flt_agrega.setOnClickListener{
+            var intent = Intent(this, Add_PersonActivity::class.java)
+            startActivity(intent)
+        }
+
+    }
+
+    private fun PersonClicked(person : Person){
+        var intent = Intent(this, Edit_personActivity::class.java)
+        intent.putExtra("RUT",person.rut)
+        startActivity(intent)
     }
 }
