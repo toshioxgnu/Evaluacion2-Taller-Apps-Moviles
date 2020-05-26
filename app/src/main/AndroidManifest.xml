@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Edit_personActivity"></activity>
+        <activity android:name=".Add_PersonActivity"></activity>
+        <activity android:name=".Edit_personActivity" />
         <activity android:name=".Person_ViewActivity" />
         <activity android:name=".listView" />
         <activity android:name=".MainActivity">
