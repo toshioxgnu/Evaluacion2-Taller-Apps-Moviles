@@ -3,7 +3,7 @@
     android:id="@+id/RV_Row"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:clickable="false">
+    android:clickable="true">
 
     <TextView
         android:id="@+id/textView11"
@@ -70,41 +70,5 @@
         android:layout_marginRight="242dp"
         android:layout_marginBottom="27dp"
         android:text="@string/textview" />
-
-    <Button
-        android:id="@+id/btn_edita"
-        android:layout_width="106dp"
-        android:layout_height="48dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="277dp"
-        android:layout_marginLeft="277dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginRight="28dp"
-        android:layout_marginBottom="52dp"
-        android:text="@string/editar" />
-
-    <Button
-        android:id="@+id/btn_elimina"
-        android:layout_width="104dp"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="278dp"
-        android:layout_marginLeft="278dp"
-        android:layout_marginTop="53dp"
-        android:layout_marginEnd="29dp"
-        android:layout_marginRight="29dp"
-        android:layout_marginBottom="-3dp"
-        android:text="@string/eliminar" />
 
 </RelativeLayout>

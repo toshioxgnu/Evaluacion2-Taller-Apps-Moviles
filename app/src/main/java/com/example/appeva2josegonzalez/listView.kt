@@ -20,13 +20,13 @@ import kotlinx.android.synthetic.main.person_row.*
 import kotlinx.android.synthetic.main.person_row.view.*
 
 
-class listView : AppCompatActivity(), Person_adapter.OnPersonListener {
+class listView : AppCompatActivity(){
     var PersonList = ArrayList<Person>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_view)
 
-        var personsURL = "http://192.168.1.81:5000/api/v1/resources/persons"
+        var personsURL = "http://192.168.171.2:5000/api/v1/resources/persons"
 
         var request0 = Volley.newRequestQueue(this@listView)
         var jsonAR = JsonArrayRequest(Request.Method.GET, personsURL, null, Response.Listener {
@@ -38,7 +38,7 @@ class listView : AppCompatActivity(), Person_adapter.OnPersonListener {
                     response.getJSONObject(jsonObject).getString("MAIL")))
             }
             RV_Persons.layoutManager = LinearLayoutManager(this@listView)
-            var rvAdapater = Person_adapter(this@listView, PersonList)
+            var rvAdapater = Person_adapter(this@listView, PersonList , {person: Person -> PersonClicked(person)})
             RV_Persons.adapter = rvAdapater
 
         }, Response.ErrorListener{
@@ -50,11 +50,14 @@ class listView : AppCompatActivity(), Person_adapter.OnPersonListener {
         })
 
         request0.add(jsonAR)
+
+
+
     }
 
-    override fun onPersonClick(position: Int) {
-        PersonList.get(position)
-        var intent= Intent(this, Edit_personActivity::class.java)
+    private fun PersonClicked(person : Person){
+        var intent = Intent(this, Edit_personActivity::class.java)
+        intent.putExtra("RUT",person.rut)
         startActivity(intent)
     }
 }
