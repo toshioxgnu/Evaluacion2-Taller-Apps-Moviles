@@ -1,13 +1,9 @@
 import flask 
 from flask import request, jsonify
 import pymysql.cursors
-import socket
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = False
-
-ip = socket.gethostbyname(socket.gethostname())
-
 
 @app.route('/api/v1/resources/persons', methods=['GET'])
 def api_all():
@@ -73,5 +69,23 @@ def api_delete():
     finally:
         conn.close()
 
-print(ip)
-app.run(ip)
+@app.route('/api/v1/resources/persons/update',methods=['GET'])
+def api_update():
+    query_parameters = request.args
+    rut=query_parameters.get('RUT')
+    nombre=query_parameters.get('NOMBRE')
+    telefono=query_parameters.get('TELEFONO')
+    mail=query_parameters.get('MAIL')
+
+    conn = pymysql.connect(host='localhost', user='root',password='root',db='appmoviles',cursorclass=pymysql.cursors.DictCursor)
+
+    try:
+        with conn.cursor() as cursor:
+            query = "update `tbpersonas` set `NOMBRE`= %s, `TELEFONO`=%s, `MAIL`=%s  where `RUT` = %s"
+            cursor.execute(query,(nombre,telefono,mail,rut))
+        conn.commit()
+        return jsonify(True)
+    finally:
+        conn.close()
+
+app.run('192.168.1.81')

@@ -12,5 +12,7 @@ class Edit_personActivity : AppCompatActivity() {
         var rut = intent.getStringExtra("RUT")
         var txtrut = findViewById<TextView>(R.id.txtrut)
         txtrut.text = rut
+
+
     }
 }

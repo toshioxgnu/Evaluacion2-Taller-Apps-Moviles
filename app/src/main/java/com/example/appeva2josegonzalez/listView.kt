@@ -26,7 +26,7 @@ class listView : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_view)
 
-        var personsURL = "http://192.168.171.2:5000/api/v1/resources/persons"
+        var personsURL = "http://192.168.1.81:5000/api/v1/resources/persons"
 
         var request0 = Volley.newRequestQueue(this@listView)
         var jsonAR = JsonArrayRequest(Request.Method.GET, personsURL, null, Response.Listener {
@@ -48,11 +48,7 @@ class listView : AppCompatActivity(){
             alerta.setMessage(error.message)
             alerta.show()
         })
-
         request0.add(jsonAR)
-
-
-
     }
 
     private fun PersonClicked(person : Person){
