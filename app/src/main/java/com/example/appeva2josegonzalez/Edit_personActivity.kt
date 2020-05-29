@@ -25,7 +25,7 @@ class Edit_personActivity : AppCompatActivity() {
         setContentView(R.layout.activity_edit_person)
         var rut = intent.getStringExtra("RUT")
         var personsURL = "http://192.168.1.81:5000/api/v1/resources/persons/select?RUT="+rut
-        var txtrut = findViewById<EditText>(R.id.text)
+        var txtrut = findViewById<EditText>(R.id.textrut)
         var txtnombre = findViewById<EditText>(R.id.textnombre)
         var txttelefono = findViewById<EditText>(R.id.texttelefono)
         var txtmail = findViewById<EditText>(R.id.textmail)
