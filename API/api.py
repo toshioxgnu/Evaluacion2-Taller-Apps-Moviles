@@ -7,7 +7,7 @@ app.config["DEBUG"] = False
 
 @app.route('/api/v1/resources/persons', methods=['GET'])
 def api_all():
-    conn = pymysql.connect(host='localhost', user='root',password='root',db='appmoviles',cursorclass=pymysql.cursors.DictCursor)
+    conn = pymysql.connect(host='localhost', user='jose',password='@Lkl15963',db='appmoviles',cursorclass=pymysql.cursors.DictCursor)
 
     try:
         with conn.cursor() as cursor:
@@ -23,7 +23,7 @@ def api_filter():
     query_parameters = request.args
 
     rut=query_parameters.get('RUT')
-    conn = pymysql.connect(host='localhost', user='root',password='root',db='appmoviles',cursorclass=pymysql.cursors.DictCursor)
+    conn = pymysql.connect(host='localhost', user='jose',password='@Lkl15963',db='appmoviles',cursorclass=pymysql.cursors.DictCursor)
 
     try:
         with conn.cursor() as cursor:
@@ -42,7 +42,7 @@ def api_insert():
     telefono=query_parameters.get('TELEFONO')
     mail=query_parameters.get('MAIL')
 
-    conn = pymysql.connect(host='localhost', user='root',password='root',db='appmoviles',cursorclass=pymysql.cursors.DictCursor)
+    conn = pymysql.connect(host='localhost', user='jose',password='@Lkl15963',db='appmoviles',cursorclass=pymysql.cursors.DictCursor)
 
     try:
         with conn.cursor() as cursor: 
@@ -58,7 +58,7 @@ def api_delete():
     query_parameters = request.args
     rut=query_parameters.get('RUT')
 
-    conn = pymysql.connect(host='localhost', user='root',password='root',db='appmoviles',cursorclass=pymysql.cursors.DictCursor)
+    conn = pymysql.connect(host='localhost', user='jose',password='@Lkl15963',db='appmoviles',cursorclass=pymysql.cursors.DictCursor)
 
     try:
         with conn.cursor() as cursor:
@@ -77,7 +77,7 @@ def api_update():
     telefono=query_parameters.get('TELEFONO')
     mail=query_parameters.get('MAIL')
 
-    conn = pymysql.connect(host='localhost', user='root',password='root',db='appmoviles',cursorclass=pymysql.cursors.DictCursor)
+    conn = pymysql.connect(host='localhost', user='jose',password='@Lkl15963',db='appmoviles',cursorclass=pymysql.cursors.DictCursor)
 
     try:
         with conn.cursor() as cursor:
