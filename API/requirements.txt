@@ -1,4 +1,4 @@
-﻿astroid==2.3.3
+astroid==2.3.3
 certifi==2022.12.7
 chardet==3.0.4
 click==7.1.2
@@ -25,7 +25,7 @@ pytz==2019.3
 requests==2.23.0
 six==1.14.0
 tqdm==4.45.0
-urllib3==1.25.8
+urllib3==1.26.18
 Werkzeug==1.0.1
 wrapt==1.11.2
 xlrd==1.2.0
